@@ -1,0 +1,46 @@
+{
+    "name": "malef/associate",
+    "description": "This library allows to collect objects through associations and provides entity loading optimizations for Doctrine ORM to address N+1 queries problem.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mariusz Bąk",
+            "email": "mariusz.alef.bak@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/property-access": "^3.0|^4.0",
+        "nicmart/tree": "^0.2.7",
+        "ext-sqlite3": "^7.2"
+    },
+    "require-dev": {
+        "doctrine/orm": "^2.4,>=2.4.5",
+        "webonyx/graphql-php": "^0.9,>=0.9.0",
+        "phpunit/phpunit": "^7.0",
+        "friendsofphp/php-cs-fixer": "^2.7",
+        "phpmd/phpmd": "^2.6",
+        "phpstan/phpstan": "^0.9.2",
+        "symfony/var-dumper": "^4.0",
+        "symfony/yaml": "^4.0",
+        "nelmio/alice": "^3.5",
+        "symfony/stopwatch": "^4.2",
+        "overtrue/phplint": "^1.1",
+        "phpunit/dbunit": "^4.0"
+    },
+    "suggest": {
+        "doctrine/orm": "^2.4,>=2.4.5",
+        "webonyx/graphql-php": "^0.9,>=0.9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Malef\\Associate\\": "lib"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Malef\\AssociateTests\\": "tests"
+        }
+    }
+}

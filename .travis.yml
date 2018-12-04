@@ -1,0 +1,42 @@
+language: php
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.3
+    - php: nightly
+  allow_failures:
+    - php: 7.3
+    - php: nightly
+
+branches:
+  only:
+    - master
+    - develop
+    - /^d+\.\d+$/
+
+cache:
+  directories:
+    - vendor/
+    - $HOME/.composer/cache
+
+before_install:
+  - phpenv config-rm xdebug.ini || echo "XDebug disabled."
+  - composer self-update
+
+install: 
+  - cp phpunit.xml.dist phpunit.xml
+  - composer install
+
+script:
+  - ./vendor/bin/phplint lib/
+  - ./vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation lib/
+  - ./vendor/bin/phpstan analyse lib/
+  - ./vendor/bin/phpmd ./lib text phpmd.xml
+
+  - ./vendor/bin/phpunit -c phpunit.xml tests/
+
+  - ./vendor/bin/phplint tests/
+  - ./vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation tests/
+  - ./vendor/bin/phpstan analyse tests/
