@@ -1,0 +1,3 @@
+parameters:
+	ignoreErrors:
+		- '#Result of method Tree\\Node\\NodeInterface::accept\(\) \(void\) is used\.#'

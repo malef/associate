@@ -37,7 +37,7 @@ class MetadataAdapterProvider
      */
     public function getClassNameForEntities(ArrayCollection $objects): string
     {
-        if (!$objects) {
+        if ($objects->isEmpty()) {
             throw new AssociateException();
         }
 

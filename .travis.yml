@@ -32,7 +32,7 @@ install:
 script:
   - ./vendor/bin/phplint lib/
   - ./vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation lib/
-  - ./vendor/bin/phpstan analyse lib/
+  - ./vendor/bin/phpstan analyse -c phpstan.neon --level=4 lib/
   - ./vendor/bin/phpmd ./lib text phpmd.xml
 
   - ./vendor/bin/phpunit -c phpunit.xml tests/

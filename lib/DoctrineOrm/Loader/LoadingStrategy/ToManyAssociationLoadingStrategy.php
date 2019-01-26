@@ -34,6 +34,7 @@ class ToManyAssociationLoadingStrategy implements AssociationLoadingStrategyInte
         $sourceClassMetadataAdapter = $associationMetadataAdapter->getSourceClassMetadataAdapter();
 
         // TODO Clean this up. What other situations need to be handled? What about uninitialized proxies here?
+
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $filteredSourceIdentities = $sourceEntities->filter(
             function ($sourceEntity) use ($propertyAccessor, $associationMetadataAdapter) {
@@ -42,6 +43,7 @@ class ToManyAssociationLoadingStrategy implements AssociationLoadingStrategyInte
                 return $propertyValue instanceof PersistentCollection && !$propertyValue->isInitialized();
             }
         );
+
         // TODO For initialized collections we should probably check if all items are initialized.
 
         foreach ($this->chunkingStrategy->chunk($filteredSourceIdentities) as $entityChunk) {
