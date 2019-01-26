@@ -14,18 +14,28 @@ use Malef\Associate\DoctrineOrm\Loader\EntityLoader;
 use Malef\Associate\DoctrineOrm\Loader\EntityLoaderFactory;
 use Malef\Associate\DoctrineOrm\Loader\UninitializedProxiesLoader;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Facade
 {
+    const CHUNK_SIZE_FOR_UNINITIALIZED_PROXIES = 'chunk_size_for_uninitialized_proxies';
+    const CHUNK_SIZE_FOR_TO_MANY_ASSOCIATIONS = 'chunk_size_for_to_many_associations';
+
     /**
      * @var EntityManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var array
+     */
+    protected $options;
+
+    public function __construct(EntityManagerInterface $entityManager, array $options = [])
     {
         $this->entityManager = $entityManager;
+        $this->options = $this->resolveOptions($options);
     }
 
     public function createAssociationTreeBuilder(): AssociationTreeBuilder
@@ -35,14 +45,12 @@ class Facade
 
     public function createEntityLoader(): EntityLoader
     {
-        $chunkingStrategy = new ChunkingStrategy();
-
         $associationCollector = new AssociationCollector(
             PropertyAccess::createPropertyAccessor()
         );
 
         $uninitializedProxiesLoader = new UninitializedProxiesLoader(
-            $chunkingStrategy
+            new ChunkingStrategy($this->options[self::CHUNK_SIZE_FOR_UNINITIALIZED_PROXIES])
         );
 
         $entityLoaderFactory = new EntityLoaderFactory(
@@ -53,7 +61,7 @@ class Facade
                     $uninitializedProxiesLoader
                 ),
                 new ToManyAssociationLoadingStrategy(
-                    $chunkingStrategy
+                    new ChunkingStrategy($this->options[self::CHUNK_SIZE_FOR_TO_MANY_ASSOCIATIONS])
                 )
             ),
             $associationCollector,
@@ -68,5 +76,21 @@ class Facade
         return new DeferredEntityLoaderFactory(
             $this->createEntityLoader()
         );
+    }
+
+    protected function resolveOptions(array $options): array
+    {
+        $optionsResolver = new OptionsResolver();
+        $optionsResolver
+            ->setRequired([
+                self::CHUNK_SIZE_FOR_UNINITIALIZED_PROXIES,
+                self::CHUNK_SIZE_FOR_TO_MANY_ASSOCIATIONS,
+            ])
+            ->setAllowedTypes(self::CHUNK_SIZE_FOR_UNINITIALIZED_PROXIES, 'int')
+            ->setDefault(self::CHUNK_SIZE_FOR_UNINITIALIZED_PROXIES, 100)
+            ->setAllowedTypes(self::CHUNK_SIZE_FOR_TO_MANY_ASSOCIATIONS, 'int')
+            ->setDefault(self::CHUNK_SIZE_FOR_TO_MANY_ASSOCIATIONS, 100);
+
+        return $optionsResolver->resolve($options);
     }
 }

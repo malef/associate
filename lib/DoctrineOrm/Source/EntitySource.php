@@ -24,7 +24,7 @@ class EntitySource
 
     /**
      * @param ArrayCollection $entities
-     * @param null|string     $entityClass
+     * @param string|null     $entityClass
      */
     public function __construct(ArrayCollection $entities, ?string $entityClass = null)
     {

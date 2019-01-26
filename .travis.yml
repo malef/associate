@@ -7,8 +7,8 @@ matrix:
     - php: 7.3
     - php: nightly
   allow_failures:
-    - php: 7.3
-    - php: nightly
+    - php: 7.3 # Due to PHP CS Fixer not supporting PHP 7.3 yet.
+    - php: nightly # Due to PHP CS Fixer not supporting PHP 7.3 yet.
 
 branches:
   only:
