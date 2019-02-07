@@ -85,9 +85,52 @@ $entityLoader->load($products, 'variants', Product::class);
 
 After executing this snippet all variants for given products will be loaded with a single `SELECT` query and calling `getVariants` will not result in any additional queries.
 
+### Possible input arguments
+
+`Malef\Associate\DoctrineOrm\Loader\EntityLoader::load` method accepts following arguments:
+
+* `$entities` - an instance of `iterable` containing root entities that loader should load associations for; it can be for example a plain `array` or Doctrine's `Collection`;
+
+* `$associations` - a `string` containing dot-separated names of one or more relationships to follow in sequence (e.g. `'profile'`, `'order.item.product.variant'`); or an `array` containing one or more relationship names (e.g. `['profile']`, `['order', 'item', 'product', 'variant']`); or an instance of `Malef\Associate\DoctrineOrm\Association\AssociationTree` (see next section for how to use it); only the last case will support branching out in multiple directions when following relationships;
+
+* `$entityClass` - optional; a `string` containing class name for entities included in first array; if not given then entity loader will try to detect it automatically; all entities need to share a single entity class (or a superclass in case of using Doctrine's inheritance functionality);
+
+Input arguments for methods analogous to `EntityLoader::load` (like `Malef\Associate\DoctrineOrm\Loader\DeferredEntityLoader::createDeferred` and `Malef\Associate\DoctrineOrm\Loader\DeferredEntityLoaderFactory::create`) accept similar arguments.
+
 ### Loading over multiple relationships
 
-**!!!TODO!!!** Describe more complex cases and possible arguments for `EntityLoader::load`.
+If using dot-separated string, or an array of strings as `$associations` argument it is possible to load entities following multiple associations in sequence. Assuming we have a `Product` entity with many `Variant`s, and these in turn have multiple `Offer`s available, we can use following values as `$associations`:
+
+* `'variants.offers'`,
+
+* `['variants', 'offers']`,
+
+* instance of `Malef\Associate\DoctrineOrm\Association\AssociationTree` built as follows:
+  ```php
+  $associationTree = $associationTreeBuilder
+      ->associate('variants')
+      ->associate('offers')
+      ->create();
+  ```
+
+This will allow us later to use methods like `$product->getVariants()` or `$product->getVariants()->getOffers()` without incurring any additional queries.
+
+If we want to follow multiple multiple associations that are not sequential (i.e. they diverge somehov into multiple paths) our only option is to use `Malef\Associate\DoctrineOrm\Association\AssociationTree`. Assuming that for `Offer` entity we have one `Seller` and multiple `Bidder`s we could use following code:
+
+```php
+$associationTree = $associationTreeBuilder
+    ->associate('variants')
+    ->associate('offers')
+    ->diverge()
+        ->associate('seller')
+    ->endDiverge()
+    ->diverge()
+        ->associate('offers')
+    ->endDiverge()
+    ->create();
+```
+
+This way we could also call `$product->getVariants()->getOffers()->getSeller()` and `$product->getVariants()->getOffers()->getBidders()` without incurring any additional queries.
 
 ### Chunking
 
