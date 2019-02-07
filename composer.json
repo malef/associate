@@ -13,10 +13,10 @@
         "php": "^7.2",
         "symfony/property-access": "^3.0|^4.0",
         "nicmart/tree": "^0.2.7",
-        "ext-sqlite3": "^7.2",
         "symfony/options-resolver": "^3.0|^4.0"
     },
     "require-dev": {
+        "ext-sqlite3": "^7.2",
         "doctrine/orm": "^2.4,>=2.4.5",
         "webonyx/graphql-php": "^0.9,>=0.9.0",
         "phpunit/phpunit": "^7.0",
