@@ -125,7 +125,7 @@ $associationTree = $associationTreeBuilder
         ->associate('seller')
     ->endDiverge()
     ->diverge()
-        ->associate('offers')
+        ->associate('bidders')
     ->endDiverge()
     ->create();
 ```
