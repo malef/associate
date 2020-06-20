@@ -2,9 +2,9 @@
 
 namespace Malef\AssociateTests\Unit\DoctrineOrm\Association;
 
-use PHPUnit\Framework\TestCase;
-use Malef\Associate\DoctrineOrm\Association\AssociationTreeBuilder;
 use Malef\Associate\DoctrineOrm\Association\AssociationTree;
+use Malef\Associate\DoctrineOrm\Association\AssociationTreeBuilder;
+use PHPUnit\Framework\TestCase;
 
 class AssociationTreeBuilderSmokeTest extends TestCase
 {
@@ -161,9 +161,7 @@ class AssociationTreeBuilderSmokeTest extends TestCase
     }
 
     /**
-     * @param AssociationTree $associationTree
-     *
-     * @return string[]|string
+     * @return string[]
      */
     protected function convertAssociationTreeToStrings(AssociationTree $associationTree): array
     {

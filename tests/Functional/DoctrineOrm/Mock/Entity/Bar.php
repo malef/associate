@@ -4,11 +4,11 @@ namespace Malef\AssociateTests\Functional\DoctrineOrm\Mock\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping\OneToOne;
-use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\Table;
 
 /**
@@ -54,33 +54,21 @@ class Bar
         $this->foos = new ArrayCollection();
     }
 
-    /**
-     * @param string $id
-     */
     public function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $payload
-     */
     public function setPayload(string $payload): void
     {
         $this->payload = $payload;
     }
 
-    /**
-     * @return string
-     */
     public function getPayload(): string
     {
         return $this->payload;
@@ -94,33 +82,21 @@ class Bar
         return $this->foos;
     }
 
-    /**
-     * @param Baz|null $baz
-     */
     public function setBaz(?Baz $baz): void
     {
         $this->baz = $baz;
     }
 
-    /**
-     * @return Baz|null
-     */
     public function getBaz(): ?Baz
     {
         return $this->baz;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return implode(':', [$this->id, $this->payload]);
     }
 
-    /**
-     * @return array
-     */
     public function toArrayDataSetItemsMap(): array
     {
         return [

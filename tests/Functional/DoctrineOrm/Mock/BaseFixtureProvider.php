@@ -2,10 +2,10 @@
 
 namespace Malef\AssociateTests\Functional\DoctrineOrm\Mock;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 use Nelmio\Alice\Loader\NativeLoader;
 
 abstract class BaseFixtureProvider
@@ -122,9 +122,6 @@ abstract class BaseFixtureProvider
         self::$entityManager->getConnection()->getConfiguration()->setSQLLogger(self::$queryLogger);
     }
 
-    /**
-     * @return AliceDatasetProviderInterface
-     */
     abstract protected function getDatasetProvider(): AliceDatasetProviderInterface;
 
     /**

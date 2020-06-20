@@ -2,27 +2,21 @@
 
 namespace Malef\AssociateTests\Functional\DoctrineOrm;
 
+use Doctrine\Common\Collections\Collection;
 use Malef\Associate\DoctrineOrm\Facade;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\BaseFixtureProvider;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\Entity\Bar;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\Entity\Baz;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\Entity\Foo;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\FixtureProvider;
-use Doctrine\Common\Collections\Collection;
 
 trait EntityLoaderDatasetTrait
 {
-    /**
-     * @return BaseFixtureProvider
-     */
     protected function createDataProvider(): BaseFixtureProvider
     {
         return new FixtureProvider();
     }
 
-    /**
-     * @return array
-     */
     public function dataProviderLoad(): array
     {
         /* @var BaseFixtureProvider $genericDataProvider */
@@ -209,9 +203,6 @@ trait EntityLoaderDatasetTrait
         ];
     }
 
-    /**
-     * @return array
-     */
     public function dataProviderVariousInputArgumentTypes(): array
     {
         /* @var BaseFixtureProvider $genericDataProvider */
@@ -255,7 +246,6 @@ trait EntityLoaderDatasetTrait
     }
 
     /**
-     * @param array    $entities
      * @param string[] $propertyNames
      *
      * @throws \UnexpectedValueException
@@ -266,7 +256,7 @@ trait EntityLoaderDatasetTrait
         foreach ($entities as $entity) {
             $childEntities = $this->getChildEntities($entity, $propertyName);
             foreach ($childEntities as $childEntity) {
-                (string) $childEntity;
+                $childEntityAsString = (string) $childEntity;
             }
             if ($propertyNames) {
                 $this->checkEntityProperties($childEntities, $propertyNames);
@@ -275,10 +265,7 @@ trait EntityLoaderDatasetTrait
     }
 
     /**
-     * @param mixed  $entity
-     * @param string $propertyName
-     *
-     * @return array
+     * @param mixed $entity
      *
      * @throws \UnexpectedValueException
      */
@@ -297,6 +284,8 @@ trait EntityLoaderDatasetTrait
             return $propertyValue->getValues();
         }
 
+        // This code should not be reached.
+        // @phpstan-ignore-next-line
         throw new \UnexpectedValueException();
     }
 }

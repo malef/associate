@@ -10,8 +10,6 @@ class AssociationsArgumentConverter
     /**
      * @param AssociationTree|string|string[] $associations
      *
-     * @return AssociationTree
-     *
      * @throws \Exception
      * @throws \InvalidArgumentException
      */
@@ -35,6 +33,8 @@ class AssociationsArgumentConverter
             return $associationsTreeBuilder->create();
         }
 
+        // This code should not be reached.
+        // @phpstan-ignore-next-line
         throw new \InvalidArgumentException();
     }
 }

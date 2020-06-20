@@ -12,9 +12,6 @@ class AssociationTree
      */
     protected $rootNode;
 
-    /**
-     * @param NodeInterface $rootNode
-     */
     public function __construct(NodeInterface $rootNode)
     {
         $this->rootNode = $rootNode;
@@ -39,10 +36,14 @@ class AssociationTree
     public function getPreOrderedNodes(): array
     {
         /* @var NodeInterface[] $nodes */
+        // External library uses invalid typehint for return value.
+        // @phpstan-ignore-next-line
         $nodes = $this->rootNode->accept(new PreOrderVisitor());
         $rootNode = array_shift($nodes);
         $associationTreeNodes = [];
         $nodeToAssociationTreeNodeMap = new \SplObjectStorage();
+        // External library uses invalid typehint for return value.
+        // @phpstan-ignore-next-line
         foreach ($nodes as $node) {
             $parentNode = $node->getParent();
             $associationTreeNode = new AssociationTreeNode(

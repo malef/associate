@@ -36,10 +36,6 @@ class AssociationTreeBuilder
     }
 
     /**
-     * @param string $relationshipName
-     *
-     * @return self
-     *
      * @throws \Exception
      */
     public function associate(string $relationshipName): self
@@ -50,9 +46,6 @@ class AssociationTreeBuilder
         return $this;
     }
 
-    /**
-     * @return self
-     */
     public function diverge(): self
     {
         $this->divergeNodes[] = $this->nodeBuilder->getNode();
@@ -62,8 +55,6 @@ class AssociationTreeBuilder
     }
 
     /**
-     * @return self
-     *
      * @throws \Exception
      */
     public function endDiverge(): self
@@ -81,9 +72,6 @@ class AssociationTreeBuilder
         return $this;
     }
 
-    /**
-     * @return AssociationTree
-     */
     public function create(): AssociationTree
     {
         return new AssociationTree($this->rootNode);

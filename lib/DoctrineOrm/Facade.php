@@ -2,18 +2,18 @@
 
 namespace Malef\Associate\DoctrineOrm;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Malef\Associate\DoctrineOrm\Association\AssociationTreeBuilder;
 use Malef\Associate\DoctrineOrm\Collector\AssociationCollector;
 use Malef\Associate\DoctrineOrm\Loader\AssociationLoader;
 use Malef\Associate\DoctrineOrm\Loader\ChunkingStrategy\ChunkingStrategy;
 use Malef\Associate\DoctrineOrm\Loader\DeferredEntityLoaderFactory;
+use Malef\Associate\DoctrineOrm\Loader\EntityLoader;
+use Malef\Associate\DoctrineOrm\Loader\EntityLoaderFactory;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\OneToOneInverseSideAssociationLoadingStrategy;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\ToManyAssociationLoadingStrategy;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\ToOneAssociationLoadingStrategy;
-use Malef\Associate\DoctrineOrm\Loader\EntityLoader;
-use Malef\Associate\DoctrineOrm\Loader\EntityLoaderFactory;
 use Malef\Associate\DoctrineOrm\Loader\UninitializedProxiesLoader;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 

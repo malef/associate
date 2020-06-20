@@ -2,10 +2,10 @@
 
 namespace Malef\Associate\DoctrineOrm\Loader\LoadingStrategy;
 
-use Malef\Associate\DoctrineOrm\Collector\AssociationCollector;
-use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
-use Malef\Associate\DoctrineOrm\Loader\UninitializedProxiesLoader;
 use Doctrine\Common\Collections\ArrayCollection;
+use Malef\Associate\DoctrineOrm\Collector\AssociationCollector;
+use Malef\Associate\DoctrineOrm\Loader\UninitializedProxiesLoader;
+use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
 
 class ToOneAssociationLoadingStrategy implements AssociationLoadingStrategyInterface
 {
@@ -19,10 +19,6 @@ class ToOneAssociationLoadingStrategy implements AssociationLoadingStrategyInter
      */
     protected $uninitializedProxiesLoader;
 
-    /**
-     * @param AssociationCollector       $associationCollector
-     * @param UninitializedProxiesLoader $uninitializedProxiesLoader
-     */
     public function __construct(
         AssociationCollector $associationCollector,
         UninitializedProxiesLoader $uninitializedProxiesLoader
