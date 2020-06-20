@@ -16,10 +16,6 @@ class AssociationMetadataAdapter
      */
     protected $associationMapping;
 
-    /**
-     * @param MetadataAdapterProvider $metadataAdapterProvider
-     * @param array                   $associationMapping
-     */
     public function __construct(
         MetadataAdapterProvider $metadataAdapterProvider,
         array $associationMapping
@@ -28,81 +24,52 @@ class AssociationMetadataAdapter
         $this->associationMapping = $associationMapping;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->associationMapping['fieldName'];
     }
 
-    /**
-     * @return bool
-     */
     public function isOwningSide(): bool
     {
         return $this->associationMapping['isOwningSide'];
     }
 
-    /**
-     * @return bool
-     */
     public function isInverseSide(): bool
     {
         return !$this->isOwningSide();
     }
 
-    /**
-     * @return bool
-     */
     public function isOneToOne(): bool
     {
         return ClassMetadataInfo::ONE_TO_ONE === $this->associationMapping['type'];
     }
 
-    /**
-     * @return bool
-     */
     public function isOneToMany(): bool
     {
         return ClassMetadataInfo::ONE_TO_MANY === $this->associationMapping['type'];
     }
 
-    /**
-     * @return bool
-     */
     public function isManyToOne(): bool
     {
         return ClassMetadataInfo::MANY_TO_ONE === $this->associationMapping['type'];
     }
 
-    /**
-     * @return bool
-     */
     public function isManyToMany(): bool
     {
         return ClassMetadataInfo::MANY_TO_MANY === $this->associationMapping['type'];
     }
 
-    /**
-     * @return bool
-     */
     public function isToMany(): bool
     {
         return $this->isManyToMany() || $this->isOneToMany();
     }
 
-    /**
-     * @return string
-     */
     public function getSourceClassName(): string
     {
         return $this->associationMapping['sourceEntity'];
     }
 
     /**
-     * @return ClassMetadataAdapter
-     *
      * @throws \Exception
      */
     public function getSourceClassMetadataAdapter(): ClassMetadataAdapter
@@ -115,17 +82,12 @@ class AssociationMetadataAdapter
         return $sourceClassName;
     }
 
-    /**
-     * @return string
-     */
     public function getTargetClassName(): string
     {
         return $this->associationMapping['targetEntity'];
     }
 
     /**
-     * @return ClassMetadataAdapter
-     *
      * @throws \Exception
      */
     public function getTargetClassMetadataAdapter(): ClassMetadataAdapter

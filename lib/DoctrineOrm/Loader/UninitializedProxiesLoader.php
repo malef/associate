@@ -2,10 +2,10 @@
 
 namespace Malef\Associate\DoctrineOrm\Loader;
 
-use Malef\Associate\DoctrineOrm\Loader\ChunkingStrategy\ChunkingStrategy;
-use Malef\Associate\DoctrineOrm\Metadata\ClassMetadataAdapter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Proxy\Proxy;
+use Malef\Associate\DoctrineOrm\Loader\ChunkingStrategy\ChunkingStrategy;
+use Malef\Associate\DoctrineOrm\Metadata\ClassMetadataAdapter;
 
 class UninitializedProxiesLoader
 {
@@ -19,10 +19,6 @@ class UninitializedProxiesLoader
         $this->chunkingStrategy = $chunkingStrategy;
     }
 
-    /**
-     * @param ArrayCollection      $entities
-     * @param ClassMetadataAdapter $classMetadataAdapter
-     */
     public function load(
         ArrayCollection $entities,
         ClassMetadataAdapter $classMetadataAdapter

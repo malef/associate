@@ -2,10 +2,10 @@
 
 namespace Malef\Associate\DoctrineOrm\Loader\LoadingStrategy;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Malef\Associate\DoctrineOrm\Loader\ChunkingStrategy\ChunkingStrategy;
 use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ToManyAssociationLoadingStrategy implements AssociationLoadingStrategyInterface

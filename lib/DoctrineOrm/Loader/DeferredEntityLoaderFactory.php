@@ -26,9 +26,6 @@ class DeferredEntityLoaderFactory
 
     /**
      * @param AssociationTree|string[]|string $associationTree
-     * @param string|null                     $entityClassName
-     *
-     * @return DeferredEntityLoader
      *
      * @throws \Exception
      */

@@ -35,11 +35,6 @@ class ClassMetadataAdapter
      */
     protected $associationMetadataAdapters = [];
 
-    /**
-     * @param MetadataAdapterProvider $metadataAdapterProvider
-     * @param EntityRepository        $repository
-     * @param ClassMetadata           $classMetadata
-     */
     public function __construct(
         MetadataAdapterProvider $metadataAdapterProvider,
         EntityRepository $repository,
@@ -50,35 +45,22 @@ class ClassMetadataAdapter
         $this->classMetadata = $classMetadata;
     }
 
-    /**
-     * @return string
-     */
     public function getClassName(): string
     {
         return $this->classMetadata->getName();
     }
 
-    /**
-     * @return string
-     */
     public function getRootClassName(): string
     {
         return $this->classMetadata->rootEntityName;
     }
 
-    /**
-     * @param string $rootAlias
-     *
-     * @return QueryBuilder
-     */
     public function createQueryBuilder(string $rootAlias): QueryBuilder
     {
         return $this->repository->createQueryBuilder($rootAlias);
     }
 
     /**
-     * @param object $object
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -90,11 +72,6 @@ class ClassMetadataAdapter
         return $identifierValues[$this->getIdentifierFieldName()];
     }
 
-    /**
-     * @param ArrayCollection $objects
-     *
-     * @return ArrayCollection
-     */
     public function getIdentifierValueForMany(ArrayCollection $objects): ArrayCollection
     {
         $identifiers = new ArrayCollection();
@@ -106,10 +83,6 @@ class ClassMetadataAdapter
     }
 
     /**
-     * @param string $associationName
-     *
-     * @return AssociationMetadataAdapter|null
-     *
      * @throws MappingException
      */
     public function getAssociationMetadataAdapter(string $associationName): ?AssociationMetadataAdapter
@@ -138,8 +111,6 @@ class ClassMetadataAdapter
     }
 
     /**
-     * @return string
-     *
      * @throws \Exception
      */
     public function getIdentifierFieldName(): string

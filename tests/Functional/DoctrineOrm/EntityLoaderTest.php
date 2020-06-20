@@ -2,10 +2,10 @@
 
 namespace Malef\AssociateTests\Functional\DoctrineOrm;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Malef\Associate\DoctrineOrm\Association\AssociationTree;
 use Malef\Associate\DoctrineOrm\Facade;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\DoctrineOrmQueryLogger;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
@@ -41,11 +41,8 @@ class EntityLoaderTest extends DatabaseTest
     }
 
     /**
-     * @param string          $entityClass
-     * @param string[]        $entityIds
-     * @param AssociationTree $associationTree
-     * @param int             $expectedQueriesCount
-     * @param string[]        $objectPaths
+     * @param string[] $entityIds
+     * @param string[] $objectPaths
      *
      * @dataProvider dataProviderLoad
      */
@@ -84,9 +81,7 @@ class EntityLoaderTest extends DatabaseTest
      * @param string                       $repositoryEntityClass,
      * @param ?string                      $loaderEntityClass,
      * @param string[]                     $entityIds
-     * @param \Closure                     $entitiesWrapCallback
      * @param AssociationTree|string|array $associationTree
-     * @param int                          $expectedQueriesCount
      * @param string[]                     $objectPaths
      *
      * @dataProvider dataProviderVariousInputArgumentTypes
@@ -102,18 +97,16 @@ class EntityLoaderTest extends DatabaseTest
     ) {
         $facade = new Facade($this->entityManager);
 
-        $entities = $this->entityManager->getRepository($repositoryEntityClass)->findBy(['id' => $entityIds]);
+        $entities = $this->entityManager
+            ->getRepository($repositoryEntityClass)
+            ->findBy(['id' => $entityIds]);
 
         $entitiesIterable = $entitiesWrapCallback($entities);
 
         $this->queryLogger->clearLoggedQueries();
         $facade
             ->createEntityLoader()
-            ->load(
-                $entitiesIterable,
-                $associationTree,
-                $loaderEntityClass
-            );
+            ->load($entitiesIterable, $associationTree, $loaderEntityClass);
 
         $this->assertCount($expectedQueriesCount, $this->queryLogger->getLoggedQueries());
 

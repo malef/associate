@@ -20,17 +20,11 @@ class AssociationTreeNode
         $this->parent = $parent;
     }
 
-    /**
-     * @return self|null
-     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
-    /**
-     * @return Association
-     */
     public function getAssociation(): Association
     {
         return $this->association;

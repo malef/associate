@@ -2,11 +2,11 @@
 
 namespace Malef\AssociateTests\Functional\DoctrineOrm;
 
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Deferred;
 use Malef\Associate\DoctrineOrm\Association\AssociationTree;
 use Malef\Associate\DoctrineOrm\Facade;
 use Malef\AssociateTests\Functional\DoctrineOrm\Mock\DoctrineOrmQueryLogger;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
@@ -42,11 +42,8 @@ class DeferredEntityLoaderTest extends DatabaseTest
     }
 
     /**
-     * @param string          $entityClass
-     * @param string[]        $entityIds
-     * @param AssociationTree $associationTree
-     * @param int             $expectedQueriesCount
-     * @param string[]        $objectPaths
+     * @param string[] $entityIds
+     * @param string[] $objectPaths
      *
      * @dataProvider dataProviderLoad
      */
@@ -92,9 +89,7 @@ class DeferredEntityLoaderTest extends DatabaseTest
      * @param string                       $repositoryEntityClass,
      * @param ?string                      $loaderEntityClass,
      * @param string[]                     $entityIds
-     * @param \Closure                     $entitiesWrapCallback
      * @param AssociationTree|string|array $associationTree
-     * @param int                          $expectedQueriesCount
      * @param string[]                     $objectPaths
      *
      * @dataProvider dataProviderVariousInputArgumentTypes

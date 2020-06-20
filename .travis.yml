@@ -5,9 +5,8 @@ matrix:
   include:
     - php: 7.2
     - php: 7.3
+    - php: 7.4
     - php: nightly
-  allow_failures:
-    - php: nightly # Due to PHP CS Fixer not supporting PHP 7.3 yet.
 
 branches:
   only:
@@ -31,11 +30,11 @@ install:
 script:
   - ./vendor/bin/phplint lib/
   - ./vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation lib/
-  - ./vendor/bin/phpstan analyse -c phpstan.neon --level=4 lib/
+  - ./vendor/bin/phpstan analyse --level=4 lib/
   - ./vendor/bin/phpmd ./lib text phpmd.xml
 
   - ./vendor/bin/phpunit -c phpunit.xml tests/
 
   - ./vendor/bin/phplint tests/
   - ./vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation tests/
-  - ./vendor/bin/phpstan analyse tests/
+  - ./vendor/bin/phpstan analyse --level=4 tests/

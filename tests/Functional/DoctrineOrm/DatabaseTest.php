@@ -2,8 +2,8 @@
 
 namespace Malef\AssociateTests\Functional\DoctrineOrm;
 
-use Malef\AssociateTests\Functional\DoctrineOrm\Mock\BaseFixtureProvider;
 use Doctrine\ORM\Tools\ToolsException;
+use Malef\AssociateTests\Functional\DoctrineOrm\Mock\BaseFixtureProvider;
 use PHPUnit\DbUnit\Database\Connection;
 use PHPUnit\DbUnit\Database\DefaultConnection;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
@@ -58,9 +58,6 @@ abstract class DatabaseTest extends TestCase
         );
     }
 
-    /**
-     * @return BaseFixtureProvider
-     */
     public function getFixtureProvider(): BaseFixtureProvider
     {
         if (!$this->dataProvider instanceof BaseFixtureProvider) {
@@ -70,8 +67,5 @@ abstract class DatabaseTest extends TestCase
         return $this->dataProvider;
     }
 
-    /**
-     * @return BaseFixtureProvider
-     */
     abstract protected function createDataProvider(): BaseFixtureProvider;
 }

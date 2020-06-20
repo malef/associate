@@ -2,10 +2,10 @@
 
 namespace Malef\Associate\DoctrineOrm\Collector;
 
-use Malef\Associate\DoctrineOrm\Source\UniqueEntitySet;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
+use Malef\Associate\DoctrineOrm\Source\UniqueEntitySet;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class AssociationCollector
 {
@@ -14,9 +14,6 @@ class AssociationCollector
      */
     protected $propertyAccessor;
 
-    /**
-     * @param PropertyAccessor $propertyAccessor
-     */
     public function __construct(PropertyAccessor $propertyAccessor)
     {
         $this->propertyAccessor = $propertyAccessor;

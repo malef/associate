@@ -4,11 +4,11 @@ namespace Malef\Associate\DoctrineOrm\Loader;
 
 use Doctrine\ORM\Mapping\MappingException;
 use Malef\Associate\AssociateException;
+use Malef\Associate\DoctrineOrm\Association\AssociationTree;
 use Malef\Associate\DoctrineOrm\Association\AssociationTreeNode;
+use Malef\Associate\DoctrineOrm\Collector\AssociationCollector;
 use Malef\Associate\DoctrineOrm\Loader\ArgumentConverter\AssociationsArgumentConverter;
 use Malef\Associate\DoctrineOrm\Loader\ArgumentConverter\EntitiesArgumentConverter;
-use Malef\Associate\DoctrineOrm\Association\AssociationTree;
-use Malef\Associate\DoctrineOrm\Collector\AssociationCollector;
 use Malef\Associate\DoctrineOrm\Metadata\MetadataAdapterProvider;
 use Malef\Associate\DoctrineOrm\Source\EntitySource;
 
@@ -44,14 +44,6 @@ class EntityLoader
      */
     protected $uninitializedProxiesLoader;
 
-    /**
-     * @param EntitiesArgumentConverter     $entitiesArgumentConverter
-     * @param AssociationsArgumentConverter $associationsArgumentConverter
-     * @param MetadataAdapterProvider       $metadataAdapterProvider
-     * @param AssociationLoader             $associationLoader
-     * @param AssociationCollector          $associationCollector
-     * @param UninitializedProxiesLoader    $uninitializedProxiesLoader
-     */
     public function __construct(
         EntitiesArgumentConverter $entitiesArgumentConverter,
         AssociationsArgumentConverter $associationsArgumentConverter,
@@ -69,9 +61,7 @@ class EntityLoader
     }
 
     /**
-     * @param iterable                        $entities
      * @param AssociationTree|string[]|string $associations
-     * @param string|null                     $entityClass
      *
      * @throws \Exception
      */
@@ -105,10 +95,6 @@ class EntityLoader
     }
 
     /**
-     * @param AssociationTreeNode $node
-     * @param EntitySource        $rootEntities
-     * @param \SplObjectStorage   $nodeToEntitiesMap
-     *
      * @throws MappingException
      * @throws AssociateException
      */

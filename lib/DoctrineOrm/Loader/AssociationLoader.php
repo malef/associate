@@ -2,14 +2,14 @@
 
 namespace Malef\Associate\DoctrineOrm\Loader;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Malef\Associate\AssociateException;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\AssociationLoadingStrategyInterface;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\OneToOneInverseSideAssociationLoadingStrategy;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\ToManyAssociationLoadingStrategy;
 use Malef\Associate\DoctrineOrm\Loader\LoadingStrategy\ToOneAssociationLoadingStrategy;
-use Doctrine\Common\Collections\ArrayCollection;
 use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
-use Doctrine\Common\Collections\Collection;
 
 class AssociationLoader
 {
@@ -31,9 +31,6 @@ class AssociationLoader
     }
 
     /**
-     * @param ArrayCollection            $sourceEntities
-     * @param AssociationMetadataAdapter $associationMetadataAdapter
-     *
      * @throws AssociateException if no association loading strategy
      *                            or multiple association loading strategies are found
      */

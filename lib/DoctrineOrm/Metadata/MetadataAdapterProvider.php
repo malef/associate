@@ -2,11 +2,11 @@
 
 namespace Malef\Associate\DoctrineOrm\Metadata;
 
-use Malef\Associate\AssociateException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Malef\Associate\AssociateException;
 
 class MetadataAdapterProvider
 {
@@ -20,19 +20,12 @@ class MetadataAdapterProvider
      */
     protected $classMetadataAdapters = [];
 
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
     /**
-     * @param ArrayCollection $objects
-     *
-     * @return string
-     *
      * @throws AssociateException
      */
     public function getClassNameForEntities(ArrayCollection $objects): string
@@ -47,14 +40,10 @@ class MetadataAdapterProvider
             throw new AssociateException();
         }
         $commonClassName = $classMetadataAdapter->getClassName();
-        $rootClassNameUsed = false;
 
         foreach ($objects->slice(1) as $object) {
             if (is_a($object, $commonClassName, true)) {
                 continue;
-            }
-            if ($rootClassNameUsed) {
-                throw new AssociateException();
             }
             $commonClassName = $classMetadataAdapter->getRootClassName();
             if (!is_a($object, $commonClassName, true)) {
@@ -66,10 +55,6 @@ class MetadataAdapterProvider
     }
 
     /**
-     * @param string $className
-     *
-     * @return ClassMetadataAdapter|null
-     *
      * @throws \Exception
      */
     public function getClassMetadataAdapterByClassName(string $className): ?ClassMetadataAdapter
@@ -82,8 +67,6 @@ class MetadataAdapterProvider
     }
 
     /**
-     * @param string $className
-     *
      * @throws AssociateException
      */
     protected function initializeClassMetadataAdapterByClassName(string $className): void

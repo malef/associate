@@ -11,7 +11,7 @@
   * [License](#license)
   * [Getting started](#getting-started)
   * [Usage examples](#usage-examples)
-    * [Efficiently loading associated entities and solving N+1 queries problem](#efficiently-loading-associated-entities-and-solving-N+1-queries-problem)
+    * [Efficiently loading associated entities and solving N+1 queries problem](#efficiently-loading-associated-entities-and-solving-n1-queries-problem)
     * [Deferring association traversal to load entities in bulk](#deferring-association-traversal-to-load-entities-in-bulk)
 
 # Introduction

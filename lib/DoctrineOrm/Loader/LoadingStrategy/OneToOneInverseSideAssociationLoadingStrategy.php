@@ -2,8 +2,8 @@
 
 namespace Malef\Associate\DoctrineOrm\Loader\LoadingStrategy;
 
-use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
 use Doctrine\Common\Collections\ArrayCollection;
+use Malef\Associate\DoctrineOrm\Metadata\AssociationMetadataAdapter;
 
 class OneToOneInverseSideAssociationLoadingStrategy implements AssociationLoadingStrategyInterface
 {

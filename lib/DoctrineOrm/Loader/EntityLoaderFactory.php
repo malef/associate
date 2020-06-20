@@ -2,11 +2,11 @@
 
 namespace Malef\Associate\DoctrineOrm\Loader;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Malef\Associate\DoctrineOrm\Collector\AssociationCollector;
 use Malef\Associate\DoctrineOrm\Loader\ArgumentConverter\AssociationsArgumentConverter;
 use Malef\Associate\DoctrineOrm\Loader\ArgumentConverter\EntitiesArgumentConverter;
 use Malef\Associate\DoctrineOrm\Metadata\MetadataAdapterProvider;
-use Doctrine\ORM\EntityManagerInterface;
 
 class EntityLoaderFactory
 {
@@ -25,11 +25,6 @@ class EntityLoaderFactory
      */
     protected $uninitializedProxiesLoader;
 
-    /**
-     * @param AssociationLoader          $associationLoader
-     * @param AssociationCollector       $associationCollector
-     * @param UninitializedProxiesLoader $uninitializedProxiesLoader
-     */
     public function __construct(
         AssociationLoader $associationLoader,
         AssociationCollector $associationCollector,
@@ -40,9 +35,6 @@ class EntityLoaderFactory
         $this->uninitializedProxiesLoader = $uninitializedProxiesLoader;
     }
 
-    /**
-     * @return EntityLoader
-     */
     public function create(EntityManagerInterface $entityManager): EntityLoader
     {
         return new EntityLoader(
