@@ -25,6 +25,7 @@ before_install:
 
 install: 
   - cp phpunit.xml.dist phpunit.xml
+  - rm composer.lock
   - composer install
 
 script:
